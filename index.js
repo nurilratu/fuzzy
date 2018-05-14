@@ -168,51 +168,72 @@ var kategoriBerat = [{
     max: Infinity,
 }];
 
-function cariKategoriTinggi(input) {
-    kategoriTinggi.forEach(function(v, i) {
-        if ((input >= v.min) && (input <= v.max)) {
-            pasien.kategoriTinggi = v;                
+document.getElementById("hitung").addEventListener("click", function(e){
+    cariKategoriTinggi(document.getElementById("inputtinggi").value);
+    cariKategoriBerat(document.getElementById("inputberat").value);
+    console.log(pasien.kategoriTinggi);
+    console.log(pasien.kategoriBerat);
+});
+
+function cariKategoriTinggi(inputtinggi) {
+    kategoriTinggi.forEach(function(v, i, x) {
+        if ((input >= x[i].min) && (input < x[i].max)) {
+            pasien.kategoriTinggi = x[i];
+        } else if (x[i+1] !== undefined) {
+            if ((input <= x[i].max) && (input >= x[i+1].min)) {
+                if (((x[i].max - input) / (x[i].max - x[i+1].min)) > ((input - x[i+1].min) / (x[i].max - x[i+1].min))) {
+                    pasien.kategoriTinggi = x[i+1];
+                } else {
+                    pasien.kategoriTinggi = x[i];
+                }
+            }
         }
     });
 }
 
-//KATEGORI TINGGI
-//sangat pendek
-if(input > kategoriTinggi[0].min && input < kategoriTinggi[0].max){
-    return 1
-}else if(input > kategoriTinggi[0].max && input < kategoriTinggi[1].min){
-    return ((input - kategoriTinggi[0].min) / (kategoriTinggi[1].min - kategoriTinggi[0].max));
-}else{
-    return 0;
-};
+function cariKategoriBerat(inputberat) {
+    kategoriBerat.forEach(function(v, i, x){
+        
+    })
+}
 
-// pendek
-if(input > kategoriTinggi[1].min && input < kategoriTinggi[1].max){
-    return 1
-}else if(input > kategoriTinggi[1].max && input < kategoriTinggi[2].min){
-    return ((input - kategoriTinggi[1].min) / (kategoriTinggi[2].min - kategoriTinggi[1].max));
-}else{
-    return 0;
-};
+// //KATEGORI TINGGI
+// //sangat pendek
+// if(input > kategoriTinggi[0].min && input < kategoriTinggi[0].max){
+//     return 1
+// }else if(input > kategoriTinggi[0].max && input < kategoriTinggi[1].min){
+//     return ((input - kategoriTinggi[0].min) / (kategoriTinggi[1].min - kategoriTinggi[0].max));
+// }else{
+//     return 0;
+// };
 
-//sedang
-if(input > kategoriTinggi[2].min && input < kategoriTinggi[2].max){
-    return 1
-}else if(input > kategoriTinggi[2].max && input < kategoriTinggi[3].min){
-    return ((input - kategoriTinggi[2].min) / (kategoriTinggi[3].min - kategoriTinggi[2].max));
-}else if(input > kategoriTinggi[1].max && input < kategoriTinggi[2].min){
-    return(())    
-}else{
-    return 0;
-};
+// // pendek
+// if(input > kategoriTinggi[1].min && input < kategoriTinggi[1].max){
+//     return 1
+// }else if(input > kategoriTinggi[1].max && input < kategoriTinggi[2].min){
+//     return ((input - kategoriTinggi[1].min) / (kategoriTinggi[2].min - kategoriTinggi[1].max));
+// }else{
+//     return 0;
+// };
 
-//tinggi
-if(input > kategoriTinggi[3].min && input < kategoriTinggi[3].max){
-    return 1
-}else if(input > kategoriTinggi[3].max && input < kategoriTinggi[1].min){
-    return ((input - kategoriTinggi[3].min) / (kategoriTinggi[1].min - kategoriTinggi[0].max));
-}else{
-    return 0;
-};
+// //sedang
+// if(input > kategoriTinggi[2].min && input < kategoriTinggi[2].max){
+//     return 1
+// }else if(input > kategoriTinggi[2].max && input < kategoriTinggi[3].min){
+//     return ((input - kategoriTinggi[2].min) / (kategoriTinggi[3].min - kategoriTinggi[2].max));
+// }else if(input > kategoriTinggi[1].max && input < kategoriTinggi[2].min){
+//     return(())    
+// }else{
+//     return 0;
+// };
+
+// //tinggi
+// if(input > kategoriTinggi[3].min && input < kategoriTinggi[3].max){
+//     return 1
+// }else if(input > kategoriTinggi[3].max && input < kategoriTinggi[1].min){
+//     return ((input - kategoriTinggi[3].min) / (kategoriTinggi[1].min - kategoriTinggi[0].max));
+// }else{
+//     return 0;
+// };
 
 
